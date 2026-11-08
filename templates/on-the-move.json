@@ -1,0 +1,23 @@
+{
+  "id": "on-the-move",
+  "name": "On the Move",
+  "industry": "travel-hospitality",
+  "industry_label": "Travel & Hospitality",
+  "aspect": "9:16",
+  "summary": "A low-angle story frame: your product towers in front, a person behind it, a tilted headline in the sky.",
+  "works_for": "Stories and Reels for lifestyle products: luggage, bags, bikes, footwear, outdoor gear, travel services.",
+  "palette": ["#a3cde7", "#85a5bf", "#cfdfe7", "#e07b1a", "#3a3938"],
+  "default_colors": "bright open sky blue with one warm orange accent",
+  "model": "nano-banana-pro",
+  "model_status": "provisional",
+  "reference": "449797081554615839.jpg",
+  "source_pin_id": "449797081554615839",
+  "prompt": "Create a 9:16 vertical story advertisement for {{BRAND}}, featuring {{PRODUCT}} (category: {{CATEGORY}}).\n\nComposition: a dramatic low-angle outdoor shot. The product from Image 1 stands large in the foreground at the lower right, sharp and heroic, taking up about a third of the frame. Behind it, a stylish person in casual clothes stands with it, looking into the distance. The setting suits this category and is generic, with no recognisable landmark or real shop front. The sky is {{COLORS}}, with soft clouds.\n\nHeadline: in the upper half, set on a gentle upward diagonal, in bold rounded sans capitals, reading exactly: \"{{HEADLINE}}\". Place the second half of the headline inside a solid accent-coloured banner on the same diagonal.\n\nSupporting line: small white capitals on the same diagonal under the banner, reading exactly: \"{{SUBHEAD}}\".\n\nGraphic detail: one thin white dashed line curves across the sky behind the headline, like a route on a map.\n\nBrand: the logo if supplied, otherwise the name \"{{BRAND}}\", centred at the top. Keep the top 8% and bottom 12% free of important details, for platform controls.\n\nCall to action: a small solid rounded label at the lower left, reading exactly: \"{{CTA}}\".\n\nFinish: bright natural daylight, crisp and optimistic, polished social-ad look.",
+  "copy_brief": {
+    "style": "Optimistic and inviting, a little adventurous.",
+    "headline_words": 6,
+    "headline_note": "Should split naturally into two parts.",
+    "subhead_words": 6
+  },
+  "motion_prompt": "Slow low-angle dolly forward towards the product while clouds drift and the person's clothes and hair move in a light breeze. All text stays perfectly still and legible."
+}

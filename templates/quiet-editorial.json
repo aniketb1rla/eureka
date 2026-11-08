@@ -1,0 +1,23 @@
+{
+  "id": "quiet-editorial",
+  "name": "Quiet Editorial",
+  "industry": "jewelry-luxury",
+  "industry_label": "Jewelry & Luxury",
+  "aspect": "2:3",
+  "summary": "A calm magazine spread: serif headline and still life on one side, the product in use on the other.",
+  "works_for": "Anything sold on taste: jewelry, watches, skincare, candles, leather goods, fine stationery.",
+  "palette": ["#e6dbcd", "#d5c5b3", "#b28a69", "#4e2c1b", "#7a1f2b"],
+  "default_colors": "warm ivory and soft sand with deep brown type",
+  "model": "nano-banana-2.1",
+  "model_status": "provisional",
+  "reference": "1118018676273919224.jpg",
+  "source_pin_id": "1118018676273919224",
+  "prompt": "Create a 2:3 vertical editorial advertisement for {{BRAND}}, featuring {{PRODUCT}} (category: {{CATEGORY}}).\n\nComposition: a soft vertical split. The left 60% is a calm surface of {{COLORS}}, with a curved shadow falling across it. The right 40% is a tightly cropped, real-looking photograph of the product from Image 1 in use: on the body if it is worn, in a hand if it is held, or on a beautiful surface if it is neither. If a person appears, crop so that the face is not shown, and dress them in soft camel wool.\n\nHeadline: upper left, a refined high-contrast serif in deep brown, on two lines, reading exactly: \"{{HEADLINE}}\". Beneath it, one very fine short gold line.\n\nSupporting line: small, light and airy under the line, reading exactly: \"{{SUBHEAD}}\".\n\nStill life: in the lower left, the product from Image 1 rests on soft fabric or stone with a gentle contact shadow, shown large enough to read every detail.\n\nBrand: the logo if supplied, otherwise the name \"{{BRAND}}\", very small, at the bottom left.\n\nCall to action: small understated text beside the brand, reading exactly: \"{{CTA}}\".\n\nFinish: quiet natural window light, gentle shadows, true-to-life materials, generous empty space. Nothing glossy, nothing shouted.",
+  "copy_brief": {
+    "style": "Quiet, assured, few words, no exclamation marks.",
+    "headline_words": 3,
+    "headline_note": "An understated quality, not a command.",
+    "subhead_words": 6
+  },
+  "motion_prompt": "Soft window light drifts slowly across the surface and the product gives a single delicate glint. The camera barely moves. All text stays perfectly still and legible."
+}

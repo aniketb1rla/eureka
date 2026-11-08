@@ -1,0 +1,19 @@
+# Secrets. The Gemini key must never be in any file in this project.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# Original Pinterest pins are third-party images: server-side layout references only.
+references/*
+!references/.gitkeep
+
+# Runtime data
+.local/
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.taste-skill/

@@ -1,0 +1,19 @@
+# What `gcloud run deploy --source .` may upload. Without this file gcloud would follow .gitignore,
+# which leaves out references/ (the image needs those) and has no idea about everything else here.
+*
+!Dockerfile
+!.dockerignore
+!requirements.txt
+!studio/
+!studio/**
+!templates/
+!templates/**
+!web/
+!web/**
+!references/
+!references/**
+**/__pycache__/
+**/*.py[cod]
+**/.env*
+**/*.key
+**/*.pem

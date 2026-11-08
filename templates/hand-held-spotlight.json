@@ -1,0 +1,23 @@
+{
+  "id": "hand-held-spotlight",
+  "name": "Hand-Held Spotlight",
+  "industry": "fintech-finance",
+  "industry_label": "FinTech & Finance",
+  "aspect": "4:5",
+  "summary": "A black-and-white hand offers your product in full colour against one bold field of colour.",
+  "works_for": "Apps, cards, gadgets and small products. Upload an app screenshot and it goes on a phone.",
+  "palette": ["#050e0b", "#244f42", "#00ca94", "#3ac8a0", "#f0f4f1"],
+  "default_colors": "vivid emerald fading to near black at the lower corners",
+  "model": "nano-banana-2.1",
+  "model_status": "provisional",
+  "reference": "1017813584556446165.jpg",
+  "source_pin_id": "1017813584556446165",
+  "prompt": "Create a 4:5 vertical advertisement for {{BRAND}}, featuring {{PRODUCT}} (category: {{CATEGORY}}).\n\nComposition: a single hand reaches up from the lower right, holding the product from Image 1 towards the viewer, slightly tilted, large and sharply in focus, taking up the right two thirds of the frame. If Image 1 is an app or screen screenshot, show it unaltered on a modern unbranded smartphone held in the hand. The hand and arm are in rich black and white so that only the product is in full colour.\n\nBackground: one smooth field of {{COLORS}}, brightest behind the product.\n\nHeadline: on the left in the upper half, a clean modern sans in white, on up to three tight lines, reading exactly: \"{{HEADLINE}}\".\n\nSupporting line: directly under the headline, small and white, reading exactly: \"{{SUBHEAD}}\".\n\nBrand: the logo if supplied, otherwise the name \"{{BRAND}}\" in a small white rounded label, at the upper left.\n\nCall to action: small white text at the lower right of the frame, reading exactly: \"{{CTA}}\".\n\nFinish: high-end studio light, crisp edge light on the hand, deep clean shadows, premium and uncluttered.",
+  "copy_brief": {
+    "style": "Plain-spoken and confident, one clear promise a person can believe.",
+    "headline_words": 7,
+    "headline_note": "A simple statement, not a slogan.",
+    "subhead_words": 10
+  },
+  "motion_prompt": "The hand makes a small, natural tilt towards the camera, and light glides once across the product. The background stays still. All text stays perfectly still and legible."
+}

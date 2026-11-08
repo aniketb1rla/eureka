@@ -1,0 +1,23 @@
+{
+  "id": "giant-type",
+  "name": "Giant Type",
+  "industry": "fitness-sports",
+  "industry_label": "Fitness & Sports",
+  "aspect": "3:4",
+  "summary": "A few huge words crash over a gritty action photograph of your product being used hard.",
+  "works_for": "Anything about effort and energy: gear, supplements, gyms, tools, streetwear, energy drinks.",
+  "palette": ["#111210", "#22201f", "#403836", "#808b90", "#f2f5f7"],
+  "default_colors": "high-contrast black, charcoal and white",
+  "model": "nano-banana-pro",
+  "model_status": "provisional",
+  "reference": "1112881757936212405.jpg",
+  "source_pin_id": "1112881757936212405",
+  "prompt": "Create a 3:4 vertical poster advertisement for {{BRAND}}, featuring {{PRODUCT}} (category: {{CATEGORY}}).\n\nComposition: a gritty, high-contrast documentary photograph fills the whole frame, showing a real person mid-effort, using or carrying the product from Image 1 in an authentic setting for this category. The product stays clearly visible and recognisable in the lower two thirds. Colours are mostly {{COLORS}}, with a fine halftone print grain over the photograph.\n\nHeadline: enormous heavy condensed white capitals fill the top third, running edge to edge and bleeding slightly off the frame, stacked and warped in dramatic perspective as if rushing towards the viewer, reading exactly: \"{{HEADLINE}}\". Every letter must stay fully readable.\n\nSupporting line: at the bottom centre, three tight stacked lines of small bold white capitals, reading exactly: \"{{SUBHEAD}}\".\n\nBrand: the logo if supplied, otherwise the name \"{{BRAND}}\", small, at the top right.\n\nCall to action: small white capitals at the bottom right corner, reading exactly: \"{{CTA}}\".\n\nFinish: raw editorial sports-poster energy, hard light, deep blacks, no glossy retouching.",
+  "copy_brief": {
+    "style": "Blunt and motivating. Talks like a coach, not a brand.",
+    "headline_words": 3,
+    "headline_note": "A short command that can fill a poster.",
+    "subhead_words": 4
+  },
+  "motion_prompt": "One powerful repetition of the action in slow motion, with a slight handheld camera shake and dust in the light. The giant headline holds perfectly still and legible."
+}

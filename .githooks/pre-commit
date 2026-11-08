@@ -1,0 +1,10 @@
+#!/bin/sh
+# Fails closed: if the scanner can't run, the commit doesn't happen.
+cd "$(git rev-parse --show-toplevel)" || exit 1
+if [ -x .venv/Scripts/python.exe ]; then PY=.venv/Scripts/python.exe
+elif [ -x .venv/bin/python ]; then PY=.venv/bin/python
+else
+  echo "Secret scan can't run: create the .venv first." >&2
+  exit 1
+fi
+exec "$PY" -m scripts.secret_scan --staged

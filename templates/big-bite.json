@@ -1,0 +1,23 @@
+{
+  "id": "big-bite",
+  "name": "Big Bite",
+  "industry": "food-beverage",
+  "industry_label": "Food & Beverage",
+  "aspect": "4:5",
+  "summary": "Your product huge and up close, with a loud hand-lettered headline on a saturated field.",
+  "works_for": "Anything with texture worth staring at: food, drinks, cosmetics, sneakers, tools.",
+  "palette": ["#860a04", "#ce0001", "#be5d29", "#f2c285", "#fff4e0"],
+  "default_colors": "saturated tomato red with a darker crimson and warm amber",
+  "model": "nano-banana-pro",
+  "model_status": "provisional",
+  "reference": "1104226402442168005.jpg",
+  "source_pin_id": "1104226402442168005",
+  "prompt": "Create a 4:5 vertical advertisement for {{BRAND}}, featuring {{PRODUCT}} (category: {{CATEGORY}}).\n\nComposition: the product from Image 1 is an extreme close-up that fills the bottom half of the frame and is cropped slightly by the left and right edges, so it feels larger than life and within reach. Its surface texture is razor sharp and looks irresistible. Keep the product recognisably itself, whatever the category.\n\nBackground: a flat saturated field of {{COLORS}}, with one huge loose brush-stroke shape in a darker tone sweeping out from behind the product.\n\nHeadline: directly above the product, spanning most of the width, fat rounded hand-lettered script in warm off-white, set on a slight upward tilt with a few short hand-drawn energy strokes around it, reading exactly: \"{{HEADLINE}}\".\n\nBrand: the logo if supplied, otherwise the name \"{{BRAND}}\", small and centred above the headline.\n\nSupporting line: small clean sans at the very top of the frame, reading exactly: \"{{SUBHEAD}}\".\n\nCall to action: a small rounded off-white label tucked into the top-right corner, reading exactly: \"{{CTA}}\".\n\nFinish: warm commercial studio light, rich contrast, printed-poster punch.",
+  "copy_brief": {
+    "style": "Loud, hungry, playful, one big feeling.",
+    "headline_words": 3,
+    "headline_note": "Short enough to letter huge, ideally a craving or a dare.",
+    "subhead_words": 8
+  },
+  "motion_prompt": "Very slow push-in on the product as the surface catches the light, with a little natural movement such as steam, a glint or a drip. The background brush shape drifts a touch. All text stays perfectly still and legible."
+}

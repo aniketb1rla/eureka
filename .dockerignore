@@ -1,0 +1,12 @@
+# Allow list: only what the Dockerfile copies can enter the build, so a stray secret file can't.
+*
+!requirements.txt
+!studio/
+!templates/
+!web/
+!references/
+**/__pycache__/
+**/*.py[cod]
+**/.env*
+**/*.key
+**/*.pem

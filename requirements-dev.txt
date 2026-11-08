@@ -1,0 +1,5 @@
+-r requirements.txt
+keyring>=25.0
+pytest>=8.0
+python-dotenv>=1.0  # the Pinterest app's analyzer needs it (scripts/analyze_pins.py)
+pyyaml>=6.0  # same
