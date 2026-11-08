@@ -1,4 +1,5 @@
 import { ApiError, api, clear, costLine, developing, dropzone, field, h, mediaElement, plural, ratio, segmented, watchGeneration, when } from "./core.js";
+import { openEditor } from "./editor.js";
 
 const state = { config: null, templates: [], me: null, nav: null };
 const bar = document.getElementById("bar");
@@ -25,6 +26,15 @@ function link(path, props, ...children) {
 
 function signIn() {
   go(`/login?next=${encodeURIComponent(location.pathname)}`);
+}
+
+// What the area editor needs from the app.
+function editContext(onChange) {
+  return { me: () => state.me, refreshMe, signIn, onChange };
+}
+
+function editImage(g, onChange) {
+  openEditor(lightbox, { id: g.id, url: g.media_url, title: g.title }, editContext(onChange));
 }
 
 async function route() {
@@ -190,6 +200,7 @@ function renderTemplate(id, signal) {
         h("button", { class: "btn", type: "button", onclick: () => clear(animateSlot, animatePanel(g, signal, (video) => {
           clear(frame, h("video", { src: video.media_url, controls: true, playsinline: true, class: "rise" }));
         })) }, "Animate into video"),
+        h("button", { class: "btn", type: "button", onclick: () => editImage(g) }, "Edit an area"),
         link("/library", { class: "btn quiet" }, "Open Library")),
       animateSlot);
   };
@@ -367,6 +378,7 @@ function openLightbox(g, onChange) {
           clear(media, h("video", { src: video.media_url, controls: true, playsinline: true }));
           onChange?.();
         })) }, "Animate into video") : null,
+        g.status === "succeeded" && g.kind === "image" ? h("button", { class: "btn", type: "button", onclick: () => editImage(g, onChange) }, "Edit an area") : null,
         g.status === "succeeded" || g.status === "failed" ? h("button", { class: "btn", type: "button", onclick: async () => {
           try {
             await api(`/api/generations/${g.id}/rerun`, { method: "POST" });
@@ -493,12 +505,26 @@ function renderStudio(signal) {
 
   function drawControls() {
     textarea.placeholder = opts.kind === "image" ? "Describe the image you want to make" : "Describe the video you want to make";
-    const list = [segmented([{ value: "image", label: "Image" }, { value: "video", label: "Video" }], opts.kind, (v) => {
+    textarea.hidden = refRow.hidden = opts.kind === "edit";
+    error.hidden = true;
+    const list = [segmented([{ value: "image", label: "Image" }, { value: "video", label: "Video" }, { value: "edit", label: "Edit a photo" }], opts.kind, (v) => {
       opts.kind = v;
       opts.aspect = v === "video" ? "9:16" : "4:5";
       opts.resolution = v === "video" ? "720p" : "1K";
       drawControls();
     }, "Type")];
+    if (opts.kind === "edit") {
+      list.push(
+        dropzone({
+          title: "Choose a photo to edit", hint: "JPG, PNG or WebP. You'll paint over the part to change next.", small: true,
+          onFile: (file) => {
+            if (file) openEditor(lightbox, { file, url: URL.createObjectURL(file), title: file.name }, editContext(load));
+          },
+        }),
+        h("span", { class: "faint small" }, "To edit something you've made, open it in your Library and choose Edit an area."));
+      clear(controls, list);
+      return;
+    }
     if (opts.kind === "image") {
       list.push(
         select("Model", cfg.image_models.map((m) => ({ value: m.key, label: m.label })), opts.model, (v) => { opts.model = v; while (refs.length > maxRefs()) refs.pop(); drawRefs(); }),
@@ -521,7 +547,7 @@ function renderStudio(signal) {
     if (signal.aborted) return;
     try {
       const data = await api("/api/generations?limit=24");
-      const items = data.generations.filter((g) => g.source === "free");
+      const items = data.generations.filter((g) => g.source === "free" || g.source === "edit");
       if (items.length) {
         clear(sheet, items.map((g) => tile(g, load)));
         clear(canvas, sheet);

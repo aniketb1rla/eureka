@@ -286,3 +286,27 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: #fff; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .develop-bar i, .tile-working i { width: 100%; opacity: .6; }
 }
+
+/* ---------- area editor ---------- */
+.editor { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 2fr); }
+.editor-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 360px; padding: 16px; background: #000; }
+.editor-canvas-wrap { position: relative; line-height: 0; }
+.editor-canvas-wrap img { display: block; max-width: 100%; max-height: calc(100vh - 96px); user-select: none; -webkit-user-drag: none; }
+.editor-canvas-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; touch-action: none; cursor: none; }
+.brush-cursor {
+  position: absolute; left: 0; top: 0; width: var(--d, 40px); height: var(--d, 40px); pointer-events: none;
+  border: 1.5px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0, 0, 0, .7);
+  transform: translate(calc(var(--x, 0px) - 50%), calc(var(--y, 0px) - 50%));
+}
+.editor-stage .develop { background: rgba(0, 0, 0, .6); }
+.editor-panel { padding: var(--pad); display: flex; flex-direction: column; gap: 14px; }
+.editor-panel textarea { min-height: 84px; }
+.editor-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.range { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+.range input { width: 110px; accent-color: var(--accent); }
+.btn.start { align-self: flex-start; }
+@media (max-width: 900px) {
+  .editor { grid-template-columns: 1fr; }
+  .editor-canvas-wrap img { max-height: 58vh; }
+  .editor-stage { min-height: 0; padding: 8px; }
+}

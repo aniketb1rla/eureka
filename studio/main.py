@@ -18,7 +18,7 @@ from sqlalchemy import select, update
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from . import auth as auth_mod
-from . import db, media, redact
+from . import db, editing, media, redact
 from .config import ROOT, Settings, load_settings
 from .gemini import (IMAGE_ASPECTS, IMAGE_MODELS, IMAGE_RESOLUTIONS, VIDEO_ASPECTS, VIDEO_DURATIONS, VIDEO_MODEL_KEY,
                      VIDEO_MODEL_LABEL, VIDEO_RESOLUTIONS, Gateway, GenerationError, build_gateway)
@@ -406,6 +406,44 @@ def create_app(settings: Optional[Settings] = None, gateway: Optional[Gateway] =
         row = new_row(
             user, kind=kind, source="free", model=model_key, input_keys=inputs,
             params={**params, "prompt": text, "user_prompt": text, "aspect": aspect, "use_reference": False, "title": text[:80]},
+        )
+        await run_in_threadpool(db.reserve_and_create, engine, s, row)
+        return {"id": row["id"]}
+
+    @app.post("/api/generations/edit")
+    async def edit_area(
+        prompt: str = Form(...), mask: UploadFile = File(...), source_id: str = Form(""),
+        image: Optional[UploadFile] = File(None), user: auth_mod.User = Depends(current_user),
+    ):
+        """Change only the painted area of one of your images, or of a photo you upload."""
+        text = editing.clean_instruction(prompt)
+        if len(text) < 3:
+            raise HTTPException(400, detail="Say what should change in the highlighted area.")
+        parent_id = template_id = None
+        if source_id:
+            parent = get_owned(source_id, user)
+            if parent.kind != "image" or parent.status != "succeeded":
+                raise HTTPException(400, detail="Only a finished image can be edited.")
+            source_bytes = await run_in_threadpool(storage.get, parent.output_key)
+            source_input = {"key": parent.output_key, "mime": parent.output_mime}
+            parent_id, template_id = parent.id, parent.template_id
+        elif image is not None and image.filename:
+            source_bytes, mime = await read_image(image)
+            source_input = None
+        else:
+            raise HTTPException(400, detail="Choose an image to edit.")
+        size = await run_in_threadpool(editing.image_size, source_bytes)
+        # The mask is checked before anything is stored or reserved, so a bad highlight costs nothing.
+        mask_png = await run_in_threadpool(editing.clean_mask, await mask.read(media.MAX_UPLOAD_BYTES + 1), size)
+        if source_input is None:
+            source_input = store_input(user.id, source_bytes, mime)
+        row = new_row(
+            user, kind="image", source="edit", template_id=template_id, parent_id=parent_id, model=editing.EDIT_MODEL,
+            input_keys=[source_input, store_input(user.id, mask_png, "image/png")],
+            params={
+                "prompt": editing.edit_prompt(text), "user_prompt": text, "aspect": editing.nearest_aspect(*size),
+                "resolution": "2K" if max(size) > 1400 else "1K", "use_reference": False, "title": f"Edit: {text[:70]}",
+            },
         )
         await run_in_threadpool(db.reserve_and_create, engine, s, row)
         return {"id": row["id"]}

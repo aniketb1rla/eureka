@@ -13,7 +13,7 @@ from datetime import timedelta
 
 from sqlalchemy import select, update
 
-from . import db, media, redact
+from . import db, editing, media, redact
 from .config import Settings
 from .gemini import FAILED, Gateway, GenerationError, ImageRef
 from .secrets_store import MissingSecret
@@ -125,7 +125,13 @@ class Worker:
             g = c.execute(select(db.generations).where(db.generations.c.id == gen_id)).first()
         refs = [ImageRef(self.storage.get(item["key"]), item["mime"]) for item in g.input_keys]
         p = g.params
-        if g.kind == "image":
+        if g.source == "edit":
+            source, mask = refs
+            marked = ImageRef(editing.marked_copy(source.data, mask.data), "image/jpeg")
+            edited, _ = self.gateway.generate_image(g.model, p["prompt"], [source, marked], p["aspect"], p.get("resolution", "1K"))
+            media.sniff_image_mime(edited)
+            data, mime, ext = editing.composite(source.data, mask.data, edited), "image/jpeg", "jpg"
+        elif g.kind == "image":
             if g.template_id and p.get("use_reference"):
                 t = self.templates.get(g.template_id)
                 ref = t.reference_image() if t else None

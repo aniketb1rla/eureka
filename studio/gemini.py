@@ -28,6 +28,8 @@ IMAGE_MODELS = {
 VIDEO_MODEL_KEY = "omni-flash-1.1"
 VIDEO_MODEL_LABEL = "Omni Flash 1.1"
 IMAGE_ASPECTS = {"1:1", "4:5", "3:4", "2:3", "9:16", "16:9"}
+# Every shape the image models accept. Edits keep the source photo's shape, so they may use any of them.
+MODEL_ASPECTS = IMAGE_ASPECTS | {"4:3", "3:2", "5:4", "21:9"}
 IMAGE_RESOLUTIONS = {"1K", "2K"}
 VIDEO_ASPECTS = {"9:16", "16:9"}
 VIDEO_RESOLUTIONS = {"720p", "1080p"}
@@ -97,7 +99,7 @@ class RealGateway:
 
         contents = [types.Part.from_bytes(data=r.data, mime_type=r.mime) for r in refs] + [prompt]
         cfg = {}
-        if aspect in IMAGE_ASPECTS:
+        if aspect in MODEL_ASPECTS:
             cfg["aspect_ratio"] = aspect
         if resolution in IMAGE_RESOLUTIONS:
             cfg["image_size"] = resolution
